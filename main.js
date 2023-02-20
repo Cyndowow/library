@@ -19,6 +19,10 @@ class Library {
     addBook(newBook) {
         this.books.push(newBook)
     }
+
+    getBook(title) {
+        return this.books.find((book) => book.title === title);
+    }
 }
 
 const myLibrary = new Library();
@@ -32,28 +36,35 @@ function displayMyLibrary() {
 }
 
 const createBookCard = (book) => {
-    const bookCard = document.createElement('div')
-    const title =  document.createElement('p')
-    const author = document.createElement('P')
-    const pages = document.createElement('p')
-    const read = document.createElement('p')
+    const bookCard = document.createElement('div');
+    const title =  document.createElement('p');
+    const author = document.createElement('P');
+    const pages = document.createElement('p');
+    const buttonGroup = document.createElement('div');
+    const readBtn = document.createElement('button');
+    const removeBtn = document.createElement('button');
 
-    bookCard.classList.add('book-card')
+    bookCard.classList.add('book-card');
+    buttonGroup.classList.add('button-group');
+    readBtn.classList.add('btn');
+    removeBtn.classList.add('btn')
+    readBtn.onclick = toggleRead;
 
-    title.textContent = `${book.title}`
-    author.textContent = `${book.author}`
-    pages.textContent = `${book.pages} pages`
+    title.textContent = `${book.title}`;
+    author.textContent = `${book.author}`;
+    pages.textContent = `${book.pages} pages`;
 
     if (book.read == true) {
-        read.textContent = "Read"
+        readBtn.textContent = "Read"
     } else {
-        read.textContent = "Not read"
-    }
+        readBtn.textContent = "Not read"
+    };
 
     bookCard.appendChild(title);
     bookCard.appendChild(author);
     bookCard.appendChild(pages);
-    bookCard.appendChild(read);
+    buttonGroup.appendChild(readBtn);
+    bookCard.appendChild(buttonGroup);
     booksContainer.appendChild(bookCard);
 }
 
@@ -63,12 +74,12 @@ const addBookForm = document.getElementById('addBookForm');
 const booksContainer = document.getElementById('booksContainer');
 
 const getBookFromInput = () => {
-    const title = document.getElementById('title').value
-    const author = document.getElementById('author').value
-    const pages = document.getElementById('pages').value
-    const read = document.getElementById('read').checked
-    return new Book(title, author, pages, read)
-}
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const pages = document.getElementById('pages').value;
+    const read = document.getElementById('read').checked;
+    return new Book(title, author, pages, read);
+};
 
 const addBook = (e) => {
     e.preventDefault();
@@ -77,7 +88,7 @@ const addBook = (e) => {
     myLibrary.addBook(newBook);
     updateBooksContainer();
     resetBookForm();
-}
+};
 
 const resetBookForm = () => {
     document.getElementById('title').value = "";
@@ -97,4 +108,16 @@ const updateBooksContainer = () => {
     for(let book of myLibrary.books) {
         createBookCard(book);
     }
+};
+
+const toggleRead = (e) => {
+    const title = e.target.parentNode.parentNode.firstChild.innerHTML.replaceAll(
+        '"',
+        ''
+    );
+
+    const book = myLibrary.getBook(title);
+
+    book.read = !book.read;
+    updateBooksContainer();
 }
