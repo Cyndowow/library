@@ -31,14 +31,6 @@ class Library {
 
 const myLibrary = new Library();
 
-function addBookToLibrary(title, author, pages, read) {
-    myLibrary.push(title, author, pages, read);
-}
-
-function displayMyLibrary() {
-    
-}
-
 const createBookCard = (book) => {
     const bookCard = document.createElement('div');
     const title =  document.createElement('p');
@@ -138,3 +130,4 @@ const removeBook = (e) => {
     myLibrary.removeBook(title);
     updateBooksContainer();
 };
+

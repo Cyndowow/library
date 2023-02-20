@@ -5,12 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="header">
-        <button id="addBook">+ Add book</button>
-    </div>
-    <div class="main">
         <div class="modal" id="addBookModal">
             <form class="add-book-form" id="addBookForm">
                 <h3>Add a new book to your library</h3>
@@ -24,12 +22,16 @@
                 <p class="error-msg"></p>
 
                 <div class="read">
-                    <label for="read">Have you read it?</label>
+                    <label for="read">Did you read it?</label>
                     <input class="checkbox" type="checkbox" id="read">
                 </div>
 
-                <button class="btn" type="submit" onclick="{(e) => this.addBook(e)}">Submit</button>
+                <button class="btn" type="submit" >Submit</button>
             </form>
+    </div>
+    </div>
+    <div class="main">
+        
         </div>
         <div class="booksContainer" id="booksContainer"></div>
     </div>
