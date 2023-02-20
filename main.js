@@ -23,6 +23,10 @@ class Library {
     getBook(title) {
         return this.books.find((book) => book.title === title);
     }
+
+    removeBook(title) {
+        this.books = this.books.filter((book) => book.title !== title);
+    }
 }
 
 const myLibrary = new Library();
@@ -49,10 +53,12 @@ const createBookCard = (book) => {
     readBtn.classList.add('btn');
     removeBtn.classList.add('btn')
     readBtn.onclick = toggleRead;
+    removeBtn.onclick = removeBook;
 
     title.textContent = `${book.title}`;
     author.textContent = `${book.author}`;
     pages.textContent = `${book.pages} pages`;
+    removeBtn.textContent = "Remove";
 
     if (book.read == true) {
         readBtn.textContent = "Read"
@@ -64,6 +70,7 @@ const createBookCard = (book) => {
     bookCard.appendChild(author);
     bookCard.appendChild(pages);
     buttonGroup.appendChild(readBtn);
+    buttonGroup.appendChild(removeBtn);
     bookCard.appendChild(buttonGroup);
     booksContainer.appendChild(bookCard);
 }
@@ -120,4 +127,14 @@ const toggleRead = (e) => {
 
     book.read = !book.read;
     updateBooksContainer();
-}
+};
+
+const removeBook = (e) => {
+    const title = e.target.parentNode.parentNode.firstChild.innerHTML.replaceAll(
+        '"',
+        ''
+    );
+
+    myLibrary.removeBook(title);
+    updateBooksContainer();
+};
