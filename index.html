@@ -20,18 +20,18 @@
                 <input class="input" type="text" id="author" placeholder="Author" required>
                 <p class="error-msg"></p>
 
-                <input class="input" type="text" id="pages" placeholder="e.g. 295p" required>
+                <input class="input" type="text" id="pages" placeholder="e.g. 295" required>
                 <p class="error-msg"></p>
 
                 <div class="read">
-                    <label for="read">Have yo read it?</label>
+                    <label for="read">Have you read it?</label>
                     <input class="checkbox" type="checkbox" id="read">
                 </div>
 
-                <button class="btn" type="submit">Submit</button>
+                <button class="btn" type="submit" onclick="{(e) => this.addBook(e)}">Submit</button>
             </form>
         </div>
-        <div class="booksContainer"></div>
+        <div class="booksContainer" id="booksContainer"></div>
     </div>
 
 
